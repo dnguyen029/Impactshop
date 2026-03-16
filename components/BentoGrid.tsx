@@ -36,14 +36,13 @@ const defaultCategories = [
 ];
 
 export default function BentoGrid({ tiles }: { tiles?: any[] }) {
-  // Map Sanity tiles to the format expected by the grid, or use defaults
   const categories = tiles && tiles.length > 0 
     ? tiles.map((tile, i) => ({
-        title: tile.title || 'Untitled',
+        title: tile.title || tile.collection?.title || 'Untitled',
         _key: tile._key,
         image: tile.imageUrl || `https://picsum.photos/seed/bento-${i}/800/800`,
         size: i === 0 ? 'large' : i === 3 ? 'wide' : 'small', // Keep the same layout pattern
-        href: tile.link || '#'
+        href: tile.collection?.handle ? `/collections/${tile.collection.handle}` : (tile.link || '#')
       }))
     : defaultCategories;
 

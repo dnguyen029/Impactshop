@@ -10,8 +10,8 @@ const client = createClient({
 
 async function populate() {
   const homepageDoc = {
-    _id: 'homepage',
-    _type: 'homepage',
+    _id: 'home',
+    _type: 'home',
     title: 'Impact Shopify Homepage',
     sections: [
       {
