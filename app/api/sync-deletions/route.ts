@@ -17,7 +17,7 @@ export async function POST() {
     const sanityProducts = await client.fetch(`*[_type == "product" && store.isDeleted != true] { _id, "handle": store.slug.current }`);
 
     // 3. Identify products in Sanity not in Shopify
-    const productsToDelete = sanityProducts.filter(product => !shopifyHandles.has(product.handle));
+    const productsToDelete = sanityProducts.filter((product: any) => !shopifyHandles.has(product.handle));
 
     // 4. Patch them in Sanity
     if (productsToDelete.length > 0) {
