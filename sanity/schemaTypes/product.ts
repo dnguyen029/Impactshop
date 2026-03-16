@@ -20,14 +20,8 @@ export const product = defineType({
     defineField({ name: 'productType', type: 'string', title: 'Product Type' }),
     defineField({ name: 'tags', type: 'string', title: 'Tags' }),
     defineField({ name: 'priceRange', type: 'object', title: 'Price Range', fields: [
-      defineField({ name: 'minVariantPrice', type: 'object', title: 'Min Variant Price', fields: [
-        defineField({ name: 'amount', type: 'number', title: 'Amount' }),
-        defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
-      ]}),
-      defineField({ name: 'maxVariantPrice', type: 'object', title: 'Max Variant Price', fields: [
-        defineField({ name: 'amount', type: 'number', title: 'Amount' }),
-        defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
-      ]}),
+      defineField({ name: 'minVariantPrice', type: 'number', title: 'Min Variant Price' }),
+      defineField({ name: 'maxVariantPrice', type: 'number', title: 'Max Variant Price' }),
     ]}),
     defineField({ name: 'previewImageUrl', type: 'url', title: 'Preview Image URL' }),
     defineField({
