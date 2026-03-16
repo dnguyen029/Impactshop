@@ -183,7 +183,16 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
         name,
         values
       }, []),
-      "variants": coalesce(variants[]->{
+      "variants": coalesce(store.variants[]{
+        _key,
+        id,
+        title,
+        price,
+        inventory,
+        option1,
+        option2,
+        option3
+      }, variants[]->{
         _key,
         "id": store.id,
         "title": store.title,
