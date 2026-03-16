@@ -16,9 +16,11 @@ export const product = defineType({
         defineField({ name: 'id', type: 'number', title: 'ID' }),
         defineField({ name: 'gid', type: 'string', title: 'GID' }),
         defineField({ name: 'title', type: 'string', title: 'Title' }),
+        defineField({ name: 'handle', type: 'string', title: 'Handle' }),
         defineField({ name: 'slug', type: 'slug', title: 'Slug' }),
         defineField({ name: 'status', type: 'string', title: 'Status' }),
         defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
+        defineField({ name: 'descriptionHtml', type: 'text', title: 'HTML Description' }),
         defineField({ name: 'vendor', type: 'string', title: 'Vendor' }),
         defineField({ name: 'productType', type: 'string', title: 'Product Type' }),
         defineField({ name: 'tags', type: 'string', title: 'Tags' }),
@@ -27,8 +29,29 @@ export const product = defineType({
             defineField({ name: 'amount', type: 'string', title: 'Amount' }),
             defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
           ]}),
+          defineField({ name: 'maxVariantPrice', type: 'object', title: 'Max Variant Price', fields: [
+            defineField({ name: 'amount', type: 'string', title: 'Amount' }),
+            defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
+          ]}),
         ]}),
         defineField({ name: 'previewImageUrl', type: 'url', title: 'Preview Image URL' }),
+        defineField({ 
+          name: 'images', 
+          type: 'array', 
+          title: 'Images', 
+          of: [
+            defineArrayMember({
+              type: 'object',
+              fields: [
+                defineField({ name: 'id', type: 'string', title: 'ID' }),
+                defineField({ name: 'altText', type: 'string', title: 'Alt Text' }),
+                defineField({ name: 'src', type: 'url', title: 'Source URL' }),
+                defineField({ name: 'width', type: 'number', title: 'Width' }),
+                defineField({ name: 'height', type: 'number', title: 'Height' }),
+              ]
+            })
+          ]
+        }),
         defineField({ 
           name: 'options', 
           type: 'array', 
@@ -107,6 +130,8 @@ export const productVariant = defineType({
         defineField({ name: 'option1', type: 'string', title: 'Option 1' }),
         defineField({ name: 'option2', type: 'string', title: 'Option 2' }),
         defineField({ name: 'option3', type: 'string', title: 'Option 3' }),
+        defineField({ name: 'status', type: 'string', title: 'Status' }),
+        defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
         defineField({ name: 'createdAt', type: 'datetime', title: 'Created At' }),
         defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
       ],
