@@ -35,3 +35,7 @@ When querying products, always coalesce between `store` fields and top-level fie
 
 ## Product Visibility
 If products disappear from the homepage, verify that the `Product Grid` section is explicitly added to the `sections` array in the `home` document.
+
+## Data Integrity (Shopify Sync)
+- **Field Rule**: Always mark the `store` object as `readOnly: true` in the schema.
+- **Reason**: This prevents users from accidentally editing Shopify-synced data in the Studio, which would be overwritten during the next sync cycle. Local overrides (like manual descriptions) should be added as separate fields (e.g., the `details` field in `product.ts`).
