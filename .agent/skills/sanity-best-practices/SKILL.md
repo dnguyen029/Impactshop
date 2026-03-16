@@ -36,6 +36,12 @@ When querying products, always coalesce between `store` fields and top-level fie
 ## Product Visibility
 If products disappear from the homepage, verify that the `Product Grid` section is explicitly added to the `sections` array in the `home` document.
 
+## Revalidation Strategy
+While `next-sanity/live` is used for real-time updates, we also implement **On-Demand Revalidation** to ensure consistency across the edge.
+- **Webhook Pattern**: A webhook should trigger `app/api/revalidate/route.ts`.
+- **Manual Triggers**: Use `revalidateTag('products')` or `revalidateTag('home')` to force updates.
+- **Cache Tags**: Always fetch with appropriate tags (e.g., `['product']`, `['home']`).
+
 ## Data Integrity (Shopify Sync)
 - **Field Rule**: Always mark the `store` object as `readOnly: true` in the schema.
 - **Reason**: This prevents users from accidentally editing Shopify-synced data in the Studio, which would be overwritten during the next sync cycle. Local overrides (like manual descriptions) should be added as separate fields (e.g., the `details` field in `product.ts`).
