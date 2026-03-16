@@ -16,7 +16,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-[#f4f4f4] pt-8 pb-16">
+    <div className="min-h-screen bg-[#f4f4f4] pt-8 pb-16">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         {/* Breadcrumb */}
         <nav className="mb-8 text-sm font-medium text-zinc-500 flex gap-2">
@@ -30,12 +30,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           {/* Left Column: Images */}
           <div className="flex flex-col gap-4">
-            <div className="relative aspect-[4/5] w-full bg-white rounded-md overflow-hidden">
+            <div className="relative aspect-[4/5] w-full bg-white rounded-2xl overflow-hidden shadow-sm border border-zinc-200/50">
               <Image
                 src={product.images?.edges?.[0]?.node?.url || `https://picsum.photos/seed/${product.handle || product.id}/1200/1500`}
                 alt={product.title}
                 fill
-                className="object-cover object-center"
+                className="object-cover"
                 priority
                 referrerPolicy="no-referrer"
               />
@@ -91,6 +91,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
