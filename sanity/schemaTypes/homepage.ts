@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 import { HomeIcon } from '@sanity/icons';
 
 export const homepage = defineType({
