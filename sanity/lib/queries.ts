@@ -133,7 +133,7 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
   }
 
   try {
-    const query = groq`*[_type == "product" && (store.slug.current == $slug || slug.current == $slug || handle == $slug)][0] {
+    const query = groq`*[_type == "product" && store.isDeleted != true && (store.slug.current == $slug || slug.current == $slug || handle == $slug)][0] {
       "id": _id,
       "handle": coalesce(store.slug.current, slug.current, handle, _id),
       "title": coalesce(store.title, title, "Untitled Product"),
@@ -166,7 +166,8 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
         "option1": store.option1,
         "option2": store.option2,
         "option3": store.option3
-      }, [])
+      }, []),
+      details
     }`;
     
     const { data: product } = await sanityFetch({ 

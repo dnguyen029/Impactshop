@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { SanityLive } from "@/sanity/lib/live";
 
 const inter = Inter({ 
@@ -21,9 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="font-sans bg-white text-zinc-900 antialiased">
+      <body className="font-sans bg-white text-zinc-900 antialiased flex flex-col min-h-screen">
         <Header />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
         <SanityLive />
       </body>
     </html>

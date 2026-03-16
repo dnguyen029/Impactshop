@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^6.0.3",
     "@sanity/client": "^7.17.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.70.0",
+    "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.27",
     "lucide-react": "^0.454.0",
     "motion": "^11.11.11",

@@ -9,25 +9,25 @@ const defaultCategories = [
     title: "Men's Boards",
     image: 'https://picsum.photos/seed/mens-snowboard/800/800',
     size: 'large',
-    href: '/shop/mens'
+    href: '/#collection'
   },
   {
     title: "Women's Boards",
     image: 'https://picsum.photos/seed/womens-snowboard/800/800',
     size: 'small',
-    href: '/shop/womens'
+    href: '/#collection'
   },
   {
     title: 'Bindings',
     image: 'https://picsum.photos/seed/snowboard-bindings/800/800',
     size: 'small',
-    href: '/shop/bindings'
+    href: '/#collection'
   },
   {
     title: 'Step On® Boots',
     image: 'https://picsum.photos/seed/snowboard-boots/1200/800',
     size: 'wide',
-    href: '/shop/boots'
+    href: '/#collection'
   }
 ];
 

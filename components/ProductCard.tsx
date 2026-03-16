@@ -55,12 +55,14 @@ export default function ProductCard({ product }: ProductCardProps) {
           <h3 className="text-lg font-medium tracking-tight text-zinc-900 group-hover:underline underline-offset-4">
             {product.title}
           </h3>
-          <p className="text-zinc-500 font-mono text-sm">
-            {price ? new Intl.NumberFormat('en-US', {
-              style: 'currency',
-              currency: price.currencyCode,
-            }).format(parseFloat(price.amount)) : 'Price unavailable'}
-          </p>
+          {price && (
+            <p className="text-zinc-500 font-mono text-sm">
+              {new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: price.currencyCode,
+              }).format(parseFloat(price.amount))}
+            </p>
+          )}
         </div>
       </Link>
     </motion.div>

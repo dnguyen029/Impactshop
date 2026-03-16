@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/sanity/lib/queries';
 import ProductInteractive from '@/components/ProductInteractive';
+import { PortableText } from '@portabletext/react';
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -66,18 +67,25 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               </div>
             )}
             
-            {/* Placeholder for future Sanity Rich Text / Details */}
-            {!product.descriptionHtml && (
+            {/* Sanity Rich Text / Details */}
+            {product.details ? (
+              <div className="mt-12 pt-12 border-t border-zinc-200">
+                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-900 mb-6">Details</h2>
+                <div className="prose prose-zinc max-w-none text-zinc-600 prose-p:leading-relaxed">
+                  <PortableText value={product.details} />
+                </div>
+              </div>
+            ) : !product.descriptionHtml ? (
               <div className="mt-12 pt-12 border-t border-zinc-200">
                 <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-900 mb-6">Details</h2>
                 <p className="text-zinc-600 leading-relaxed">
                   This product is built for performance and durability. Featuring premium materials and expert craftsmanship, it&apos;s designed to elevate your experience on the mountain. 
                 </p>
                 <p className="text-zinc-600 leading-relaxed mt-4">
-                  (Note: This is placeholder text. Once we extend the Sanity schema, you can write rich, custom descriptions here!)
+                  (Note: This is placeholder text. You can now go to Sanity Studio, edit this product, and add content to the "Rich Details" field to replace this message!)
                 </p>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

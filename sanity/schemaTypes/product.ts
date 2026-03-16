@@ -25,8 +25,15 @@ export const product = defineType({
           defineField({ name: 'name', type: 'string', title: 'Name' }),
           defineField({ name: 'values', type: 'array', title: 'Values', of: [{ type: 'string' }] }),
         ]}]}),
-        defineField({ name: 'variants', type: 'array', title: 'Variants', of: [{ type: 'reference', to: [{ type: 'productVariant' }] }] }),
       ],
+    }),
+    defineField({ name: 'variants', type: 'array', title: 'Variants', of: [{ type: 'reference', to: [{ type: 'productVariant' }] }] }),
+    defineField({
+      name: 'details',
+      title: 'Rich Details (Sanity Only)',
+      description: 'Add rich text, images, and custom details for this product here. This will not be overwritten by Shopify.',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
   ],
 });
