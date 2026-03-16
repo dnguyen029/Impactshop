@@ -41,33 +41,43 @@ export async function getHomepageData(): Promise<any | null> {
   }
 
   try {
-    const query = groq`*[_type == "homepage"][0] {
+    const query = groq`*[_type == "home"][0] {
       title,
-      hero {
+      sections[] {
+        _type,
+        _key,
+        // Hero fields
+        eyebrow,
         heading,
         subheading,
+        brandingTitle,
         "imageUrl": image.asset->url,
-        cta {
-          text,
-          link,
-          style
-        }
-      },
-      tiles[] {
-        _key,
+        cta { title, link },
+        secondaryCta { title, link },
+        // Collection Grid fields
         title,
+        tiles[] {
+          _key,
+          title,
+          "imageUrl": image.asset->url,
+          collection->{
+            "id": _id,
+            "handle": store.slug.current,
+            "title": store.title
+          }
+        },
+        // Feature Section fields
         description,
-        "imageUrl": image.asset->url,
-        link
+        "images": images[].asset->url
       }
     }`;
     
-    const { data: homepage } = await sanityFetch({ 
+    const { data: home } = await sanityFetch({ 
       query,
-      tags: ['homepage'] 
+      tags: ['home'] 
     });
     
-    return homepage || null;
+    return home || null;
   } catch (error) {
     console.error('Error fetching homepage data from Sanity:', error);
     return null;
