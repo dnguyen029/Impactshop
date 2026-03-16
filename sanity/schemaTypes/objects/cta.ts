@@ -8,8 +8,8 @@ export const cta = defineType({
   icon: LinkIcon,
   fields: [
     defineField({
-      name: 'text',
-      title: 'Text',
+      name: 'title',
+      title: 'Title',
       type: 'string',
     }),
     defineField({

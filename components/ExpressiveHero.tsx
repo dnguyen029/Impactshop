@@ -8,7 +8,7 @@ export default function ExpressiveHero({ data }: { data?: any }) {
   const heading = data?.heading || "High-Performance\nSnowboards";
   const subheading = data?.subheading || "High-Performance Gear";
   const imageUrl = data?.imageUrl || "https://picsum.photos/seed/snowboard-hero/1000/1400";
-  const ctaText = data?.cta?.text || "Discover Collection";
+  const ctaText = data?.cta?.title || data?.cta?.text || "Discover Collection";
   const ctaLink = data?.cta?.link || "/#collection";
 
   return (
