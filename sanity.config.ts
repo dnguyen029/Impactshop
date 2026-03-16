@@ -14,12 +14,12 @@ export default defineConfig({
     ...schema,
     // Filter out singleton types from the global "New document" menu
     templates: (prev) =>
-      prev.filter((template) => !['homepage', 'settings'].includes(template.id)),
+      prev.filter((template) => !['home', 'settings'].includes(template.id)),
   },
   document: {
     // For singleton types, hide the "Duplicate" and "Delete" actions
     actions: (prev, { schemaType }) => {
-      if (['homepage', 'settings'].includes(schemaType)) {
+      if (['home', 'settings'].includes(schemaType)) {
         return prev.filter(({ action }) => !['delete', 'duplicate', 'unpublish'].includes(action || ''));
       }
       return prev;
