@@ -42,4 +42,16 @@ export const homepage = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare({ title }) {
+      return {
+        title: title || 'Main Homepage',
+        subtitle: 'Index Page',
+        media: HomeIcon,
+      };
+    },
+  },
 });
