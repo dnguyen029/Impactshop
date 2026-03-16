@@ -12,6 +12,7 @@ export const collection = defineType({
       name: 'store',
       title: 'Store',
       type: 'object',
+      readOnly: true,
       fields: [
         defineField({ name: 'id', type: 'number', title: 'ID' }),
         defineField({ name: 'gid', type: 'string', title: 'GID' }),
