@@ -1,8 +1,8 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { HomeIcon } from '@sanity/icons';
 
-export const homepage = defineType({
-  name: 'homepage',
+export const home = defineType({
+  name: 'home',
   title: 'Homepage',
   type: 'document',
   icon: HomeIcon,

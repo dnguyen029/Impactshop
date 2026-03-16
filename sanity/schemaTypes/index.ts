@@ -1,6 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity';
 import { product, productVariant } from './product';
-import { homepage } from './homepage';
+import { home } from './homepage';
 import { collection } from './collection';
 import { page } from './page';
 import { colorTheme } from './colorTheme';
@@ -12,7 +12,7 @@ import { featureSection } from './objects/featureSection';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
-    homepage, 
+    home, 
     page, 
     collection, 
     product, 

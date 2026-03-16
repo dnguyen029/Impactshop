@@ -18,8 +18,8 @@ export const structure: StructureResolver = (S) =>
                 .icon(HomeIcon)
                 .child(
                   S.document()
-                    .schemaType('homepage')
-                    .documentId('homepage')
+                    .schemaType('home')
+                    .documentId('home')
                 ),
               S.documentTypeListItem('page').title('Pages').icon(DocumentIcon),
             ])
