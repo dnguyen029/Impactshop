@@ -2,8 +2,8 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 import { BasketIcon, TagIcon } from '@sanity/icons';
 import React from 'react';
 
-export const product = defineType({
-  name: 'product',
+export const shopifyProduct = defineType({
+  name: 'shopifyProduct',
   title: 'Product',
   type: 'document',
   icon: BasketIcon,
@@ -21,11 +21,11 @@ export const product = defineType({
     defineField({ name: 'tags', type: 'string', title: 'Tags' }),
     defineField({ name: 'priceRange', type: 'object', title: 'Price Range', fields: [
       defineField({ name: 'minVariantPrice', type: 'object', title: 'Min Variant Price', fields: [
-        defineField({ name: 'amount', type: 'string', title: 'Amount' }),
+        defineField({ name: 'amount', type: 'number', title: 'Amount' }),
         defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
       ]}),
       defineField({ name: 'maxVariantPrice', type: 'object', title: 'Max Variant Price', fields: [
-        defineField({ name: 'amount', type: 'string', title: 'Amount' }),
+        defineField({ name: 'amount', type: 'number', title: 'Amount' }),
         defineField({ name: 'currencyCode', type: 'string', title: 'Currency Code' }),
       ]}),
     ]}),
@@ -75,7 +75,7 @@ export const product = defineType({
       of: [
         defineArrayMember({ 
           type: 'reference', 
-          to: [{ type: 'productVariant' }],
+          to: [{ type: 'shopifyProductVariant' }],
           weak: true 
         })
       ] 
@@ -108,8 +108,8 @@ export const product = defineType({
   },
 });
 
-export const productVariant = defineType({
-  name: 'productVariant',
+export const shopifyProductVariant = defineType({
+  name: 'shopifyProductVariant',
   title: 'Product Variant',
   type: 'document',
   icon: TagIcon,
