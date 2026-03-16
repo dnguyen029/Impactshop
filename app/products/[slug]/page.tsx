@@ -9,9 +9,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  console.log(`[DEBUG] Fetching product for slug: ${slug}`);
   const product = await getProductBySlug(slug);
-  console.log(`[DEBUG] Product found: ${product ? 'YES' : 'NO'}`);
 
   if (!product) {
     notFound();
