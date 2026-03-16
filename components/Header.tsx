@@ -15,6 +15,7 @@ export default function Header() {
           <button 
             className="lg:hidden text-zinc-900"
             onClick={() => setIsMobileMenuOpen(true)}
+            aria-label="Open mobile menu"
           >
             <Menu size={24} />
           </button>
@@ -35,10 +36,16 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="text-zinc-900 hover:text-zinc-500 transition-colors">
+          <button 
+            className="text-zinc-900 hover:text-zinc-500 transition-colors"
+            aria-label="Search items"
+          >
             <Search size={20} />
           </button>
-          <button className="text-zinc-900 hover:text-zinc-500 transition-colors relative">
+          <button 
+            className="text-zinc-900 hover:text-zinc-500 transition-colors relative"
+            aria-label="View shopping bag"
+          >
             <ShoppingBag size={20} />
             <span className="absolute -top-2 -right-2 bg-zinc-900 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
               0
@@ -59,6 +66,7 @@ export default function Header() {
             <button 
               className="absolute top-6 left-6 text-zinc-900"
               onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close mobile menu"
             >
               <X size={24} />
             </button>

@@ -31,5 +31,10 @@ export const page = defineType({
         defineArrayMember({ type: 'cta' }),
       ],
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & Social',
+      type: 'seo',
+    }),
   ],
 });

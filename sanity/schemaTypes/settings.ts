@@ -41,5 +41,25 @@ export const settings = defineType({
         defineArrayMember({ type: 'block' })
       ],
     }),
+    defineField({
+      name: 'shippingTitle',
+      title: 'Global Shipping Title',
+      description: 'The title shown in the shipping info box below the buy buttons (e.g. "Fast shipping")',
+      type: 'string',
+      initialValue: 'Fast shipping',
+    }),
+    defineField({
+      name: 'shippingDescription',
+      title: 'Global Shipping Description',
+      description: 'The description shown in the shipping info box (e.g. "Place your order before 12:00pm...")',
+      type: 'text',
+      initialValue: 'Place your order before 12:00pm and receive it by tomorrow',
+    }),
+    defineField({
+      name: 'seo',
+      title: 'Global SEO',
+      description: 'Used as default SEO for all pages unless overridden.',
+      type: 'seo',
+    }),
   ],
 });

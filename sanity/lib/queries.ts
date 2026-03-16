@@ -72,6 +72,11 @@ export async function getHomepageData(): Promise<any | null> {
         // Product Grid fields
         title,
         eyebrow
+      },
+      seo {
+        title,
+        description,
+        "image": image.asset->url
       }
     }`;
     
@@ -104,7 +109,7 @@ export async function getProducts(): Promise<any[]> {
     }
 
     // Fetch products, handling both Sanity Connect (store.*) and flat CSV imports
-    const query = groq`*[_type == "product" && store.isDeleted != true] {
+    const query = groq`*[_type == "product" && store.isDeleted != true && store.status == "active"] | order(_createdAt desc) {
       "id": _id,
       "handle": coalesce(store.slug.current, slug.current, handle, _id),
       "title": coalesce(store.title, title, "Untitled Product"),
@@ -118,7 +123,7 @@ export async function getProducts(): Promise<any[]> {
         "edges": [
           {
             "node": {
-              "url": coalesce(store.previewImageUrl, imageUrl, image.asset->url, "https://picsum.photos/seed/snowboard/800/1200"),
+              "url": coalesce(store.previewImageUrl, imageUrl, image.asset->url, "https://picsum.photos/seed/" + coalesce(store.slug.current, slug.current, handle, _id) + "/1200/1500"),
               "altText": coalesce(store.title, title, "Product Image")
             }
           }
@@ -150,7 +155,7 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
   }
 
   try {
-    const query = groq`*[_type == "product" && store.isDeleted != true && (store.slug.current == $slug || slug.current == $slug || handle == $slug)][0] {
+    const query = groq`*[_type == "product" && store.isDeleted != true && store.status == "active" && (store.slug.current == $slug || slug.current == $slug || handle == $slug)][0] {
       "id": _id,
       "handle": coalesce(store.slug.current, slug.current, handle, _id),
       "title": coalesce(store.title, title, "Untitled Product"),
@@ -168,7 +173,7 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
         "edges": [
           {
             "node": {
-              "url": coalesce(store.previewImageUrl, imageUrl, image.asset->url, "https://picsum.photos/seed/snowboard/800/1200"),
+              "url": coalesce(store.previewImageUrl, imageUrl, image.asset->url, "https://picsum.photos/seed/" + coalesce(store.slug.current, slug.current, handle, _id) + "/1200/1500"),
               "altText": coalesce(store.title, title, "Product Image")
             }
           }
@@ -202,7 +207,12 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
         "option2": store.option2,
         "option3": store.option3
       }, []),
-      details
+      details,
+      seo {
+        title,
+        description,
+        "image": image.asset->url
+      }
     }`;
     
     const { data: product } = await sanityFetch({ 
@@ -213,6 +223,36 @@ export async function getProductBySlug(slug: string): Promise<any | null> {
     return product || null;
   } catch (error) {
     console.error('Error fetching product by slug from Sanity:', error);
+    return null;
+  }
+}
+
+export async function getSettings(): Promise<any | null> {
+  if (!projectId || projectId === 'mockProjectId' || projectId === 'your_sanity_project_id') {
+    return null;
+  }
+
+  try {
+    const query = groq`*[_type == "settings"][0] {
+      title,
+      description,
+      shippingTitle,
+      shippingDescription,
+      seo {
+        title,
+        description,
+        "image": image.asset->url
+      }
+    }`;
+    
+    const { data: settings } = await sanityFetch({ 
+      query,
+      tags: ['settings'] 
+    });
+    
+    return settings || null;
+  } catch (error) {
+    console.error('Error fetching settings from Sanity:', error);
     return null;
   }
 }

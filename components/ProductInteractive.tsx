@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { Star, Truck } from 'lucide-react';
 
-export default function ProductInteractive({ product }: { product: any }) {
+export default function ProductInteractive({ product, settings }: { product: any, settings?: any }) {
   // State for selected options
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {};
@@ -117,8 +117,12 @@ export default function ProductInteractive({ product }: { product: any }) {
       
       <div className="bg-zinc-100 rounded-md p-6 flex flex-col items-center justify-center text-center gap-2">
         <Truck className="w-6 h-6 text-zinc-900 mb-1" />
-        <span className="font-medium text-zinc-900 text-sm">Fast shipping</span>
-        <span className="text-zinc-500 text-sm">Place your order before 12:00pm and receive it by tomorrow</span>
+        <span className="font-medium text-zinc-900 text-sm">
+          {settings?.shippingTitle || 'Fast shipping'}
+        </span>
+        <span className="text-zinc-500 text-sm">
+          {settings?.shippingDescription || 'Place your order before 12:00pm and receive it by tomorrow'}
+        </span>
       </div>
     </div>
   );

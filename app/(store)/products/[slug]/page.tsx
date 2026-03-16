@@ -1,15 +1,37 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProductBySlug } from '@/sanity/lib/queries';
+import { getProductBySlug, getSettings } from '@/sanity/lib/queries';
 import ProductInteractive from '@/components/ProductInteractive';
 import { PortableText } from '@portabletext/react';
+import { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const [product, settings] = await Promise.all([
+    getProductBySlug(slug),
+    getSettings()
+  ]);
+
+  const seo = product?.seo || settings?.seo;
+
+  return {
+    title: seo?.title || product?.title || 'Product Details',
+    description: seo?.description || product?.descriptionHtml?.substring(0, 160),
+    openGraph: {
+      images: seo?.image ? [{ url: seo.image }] : product?.images?.edges?.[0]?.node?.url ? [{ url: product.images.edges[0].node.url }] : undefined,
+    },
+  };
+}
+
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const [product, settings] = await Promise.all([
+    getProductBySlug(slug),
+    getSettings()
+  ]);
 
   if (!product) {
     notFound();
@@ -32,7 +54,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <div className="flex flex-col gap-4">
             <div className="relative aspect-[4/5] w-full bg-white rounded-2xl overflow-hidden shadow-sm border border-zinc-200/50">
               <Image
-                src={product.images?.edges?.[0]?.node?.url || `https://picsum.photos/seed/${product.handle || product.id}/1200/1500`}
+                src={product.images?.edges?.[0]?.node?.url}
                 alt={product.title}
                 fill
                 className="object-cover"
@@ -56,7 +78,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             </div>
 
             {/* Interactive Variant Selection & Add to Cart */}
-            <ProductInteractive product={product} />
+            <ProductInteractive product={product} settings={settings} />
 
             {/* Product Description */}
             {product.descriptionHtml && (

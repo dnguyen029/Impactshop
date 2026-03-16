@@ -2,7 +2,25 @@ import ExpressiveHero from '@/components/ExpressiveHero';
 import BentoGrid from '@/components/BentoGrid';
 import ProductGrid from '@/components/ProductGrid';
 import AboutSection from '@/components/AboutSection';
-import { getHomepageData } from '@/sanity/lib/queries';
+import { getHomepageData, getSettings } from '@/sanity/lib/queries';
+import { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const [homeData, settings] = await Promise.all([
+    getHomepageData(),
+    getSettings()
+  ]);
+
+  const seo = homeData?.seo || settings?.seo;
+
+  return {
+    title: seo?.title || homeData?.title || settings?.title || 'Impact Snowboards',
+    description: seo?.description || settings?.description,
+    openGraph: {
+      images: seo?.image ? [{ url: seo.image }] : undefined,
+    },
+  };
+}
 
 export default async function Home() {
   const homepageData = await getHomepageData();

@@ -11,6 +11,7 @@ import { hero } from './objects/hero';
 import { collectionGrid } from './objects/collectionGrid';
 import { featureSection } from './objects/featureSection';
 import { productGrid } from './objects/productGrid';
+import { seo } from './objects/seo';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -25,6 +26,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     hero, 
     collectionGrid, 
     featureSection,
-    productGrid
+    productGrid,
+    seo
   ],
 };

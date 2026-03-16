@@ -32,6 +32,13 @@ export const collection = defineType({
         defineArrayMember({ type: 'reference', to: [{ type: 'product' }] })
       ],
     }),
+    // Root level fields for sync compatibility
+    defineField({ name: 'title', type: 'string', hidden: true }),
+    defineField({ name: 'handle', type: 'string', hidden: true }),
+    defineField({ name: 'isDeleted', type: 'boolean', hidden: true }),
+    defineField({ name: 'updatedAt', type: 'datetime', hidden: true }),
+    defineField({ name: 'createdAt', type: 'datetime', hidden: true }),
+    defineField({ name: 'publishedAt', type: 'datetime', hidden: true }),
   ],
   preview: {
     select: {

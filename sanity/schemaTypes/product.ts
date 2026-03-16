@@ -75,6 +75,15 @@ export const product = defineType({
           of: [
             defineArrayMember({ 
               type: 'shopifyProductVariant',
+            }),
+            defineArrayMember({
+              type: 'reference',
+              to: [{ type: 'shopifyProductVariant' }]
+            }),
+            // Catch-all for unknown official variant types
+            defineArrayMember({
+              type: 'reference',
+              to: [{ type: 'productVariant' }] 
             })
           ] 
         }),
@@ -90,6 +99,18 @@ export const product = defineType({
       type: 'array',
       of: [{ type: 'block' }],
     }),
+    defineField({
+      name: 'seo',
+      title: 'SEO & Social',
+      type: 'seo',
+    }),
+    // Root level fields for sync compatibility
+    defineField({ name: 'title', type: 'string', hidden: true }),
+    defineField({ name: 'handle', type: 'string', hidden: true }),
+    defineField({ name: 'isDeleted', type: 'boolean', hidden: true }),
+    defineField({ name: 'updatedAt', type: 'datetime', hidden: true }),
+    defineField({ name: 'createdAt', type: 'datetime', hidden: true }),
+    defineField({ name: 'publishedAt', type: 'datetime', hidden: true }),
   ],
   preview: {
     select: {

@@ -39,7 +39,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <Link href={`/products/${product.handle}`}>
         <div className="aspect-[3/4] overflow-hidden bg-zinc-900 rounded-2xl relative">
-          {image && (
+          {image ? (
             <Image
               src={image.url}
               alt={image.altText || product.title}
@@ -47,6 +47,8 @@ export default function ProductCard({ product }: ProductCardProps) {
               className="object-cover transition-transform duration-700 group-hover:scale-110"
               referrerPolicy="no-referrer"
             />
+          ) : (
+            <div className="w-full h-full bg-zinc-200 animate-pulse" />
           )}
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
