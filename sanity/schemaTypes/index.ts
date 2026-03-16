@@ -1,6 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity';
 import { product, productVariant } from './product';
-import { home } from './homepage';
+import { home } from './home';
 import { collection } from './collection';
 import { page } from './page';
 import { colorTheme } from './colorTheme';

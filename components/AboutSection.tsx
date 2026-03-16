@@ -3,7 +3,19 @@
 import { motion } from 'motion/react';
 import Image from 'next/image';
 
-export default function AboutSection() {
+export default function AboutSection({ data }: { data?: any }) {
+  const eyebrow = data?.eyebrow || "About us";
+  const title = data?.title || (
+    <>
+      Designed & <br />
+      developed in <br />
+      <span className="text-zinc-300">Vermont</span>
+    </>
+  );
+  const description = data?.description || "Born in the mountains, Impact was founded by riders who demanded more from their gear. We obsess over every edge, core, and camber profile to build boards that elevate your ride, whether you're carving groomers or floating in deep powder.";
+  const image1 = data?.images?.[0] || "https://picsum.photos/seed/snow-mountain/800/1200";
+  const image2 = data?.images?.[1] || "https://picsum.photos/seed/snowboard-craft/600/600";
+
   return (
     <section className="py-32 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
@@ -18,7 +30,7 @@ export default function AboutSection() {
             className="relative w-2/3 aspect-[3/4] rounded-[40px] overflow-hidden z-10 shadow-2xl"
           >
             <Image
-              src="https://picsum.photos/seed/snow-mountain/800/1200"
+              src={image1}
               alt="Mountain riding"
               fill
               className="object-cover"
@@ -34,7 +46,7 @@ export default function AboutSection() {
             className="absolute right-0 top-1/2 -translate-y-1/2 w-1/2 aspect-square rounded-[32px] overflow-hidden shadow-xl border-8 border-white"
           >
             <Image
-              src="https://picsum.photos/seed/snowboard-craft/600/600"
+              src={image2}
               alt="Board crafting"
               fill
               className="object-cover"
@@ -52,16 +64,14 @@ export default function AboutSection() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6 block">
-              About us
+              {eyebrow}
             </span>
             <h2 className="font-display text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9] mb-10">
-              Designed & <br />
-              developed in <br />
-              <span className="text-zinc-300">Vermont</span>
+              {title}
             </h2>
             
             <p className="text-zinc-500 text-lg leading-relaxed max-w-md mb-12">
-              Born in the mountains, Impact was founded by riders who demanded more from their gear. We obsess over every edge, core, and camber profile to build boards that elevate your ride, whether you&apos;re carving groomers or floating in deep powder.
+              {description}
             </p>
             
             <div className="flex gap-4">
