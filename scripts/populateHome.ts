@@ -60,6 +60,12 @@ async function populate() {
         ]
       },
       {
+        _key: 'pgrid1',
+        _type: 'productGrid',
+        title: 'Featured Gear',
+        eyebrow: 'THE COLLECTION'
+      },
+      {
         _key: 'feature1',
         _type: 'featureSection',
         eyebrow: 'ABOUT US',

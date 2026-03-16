@@ -38,6 +38,9 @@ export default async function Home() {
             </div>
           );
         }
+        if (section._type === 'collectionGrid') {
+          return <BentoGrid key={section._key} tiles={section.tiles} />;
+        }
         if (section._type === 'featureSection') {
           return <AboutSection key={section._key} data={section} />;
         }

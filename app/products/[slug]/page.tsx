@@ -68,24 +68,24 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             )}
             
             {/* Sanity Rich Text / Details */}
-            {product.details ? (
-              <div className="mt-12 pt-12 border-t border-zinc-200">
-                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-900 mb-6">Details</h2>
+            <div className="mt-12 pt-12 border-t border-zinc-200">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-900 mb-6">Details</h2>
+              {product.details ? (
                 <div className="prose prose-zinc max-w-none text-zinc-600 prose-p:leading-relaxed">
                   <PortableText value={product.details} />
                 </div>
-              </div>
-            ) : !product.descriptionHtml ? (
-              <div className="mt-12 pt-12 border-t border-zinc-200">
-                <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-900 mb-6">Details</h2>
-                <p className="text-zinc-600 leading-relaxed">
-                  This product is built for performance and durability. Featuring premium materials and expert craftsmanship, it&apos;s designed to elevate your experience on the mountain. 
-                </p>
-                <p className="text-zinc-600 leading-relaxed mt-4">
-                  (Note: This is placeholder text. You can now go to Sanity Studio, edit this product, and add content to the "Rich Details" field to replace this message!)
-                </p>
-              </div>
-            ) : null}
+              ) : (
+                <>
+                  <p className="text-zinc-600 leading-relaxed">
+                    This product is built for performance and durability. Featuring premium materials and expert craftsmanship, it&apos;s designed to elevate your experience on the mountain. 
+                  </p>
+                  <p className="text-zinc-600 font-medium text-xs uppercase tracking-wider py-3 px-4 bg-zinc-200/50 rounded-lg mt-6 text-zinc-500 border border-zinc-300/30">
+                    <span className="text-zinc-900 font-bold mr-1">CMS Reminder:</span> 
+                    Add content to the "Rich Details" field in Sanity to replace this placeholder.
+                  </p>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

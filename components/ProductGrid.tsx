@@ -19,6 +19,10 @@ export default async function ProductGrid() {
 
   return (
     <section className="pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+      {/* Debug count (only visible in dev or special circumstances, but we'll show it for now) */}
+      <div className="mb-8 text-xs text-zinc-400">
+        Found {products.length} products in Sanity dataset.
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
         {products.map((product) => (
           <ProductCard key={product.id || product._id} product={product} />

@@ -132,25 +132,39 @@ function buildProductDocument(product: any) {
       values: option.values,
     })),
     priceRange: {
-      minVariantPrice: Number(priceRange?.minVariantPrice?.amount || 0),
-      maxVariantPrice: Number(priceRange?.maxVariantPrice?.amount || 0),
+      minVariantPrice: Number(priceRange?.minVariantPrice?.amount || priceRange?.minVariantPrice || 0),
+      maxVariantPrice: Number(priceRange?.maxVariantPrice?.amount || priceRange?.maxVariantPrice || 0),
     },
     productType: productType,
     vendor: vendor,
-    tags: tags?.join(', ') || '',
-    variants: variants?.edges?.map((edge: any) => {
-      const variant = edge.node;
+    tags: tags?.join(', ') || (Array.isArray(tags) ? tags.join(', ') : tags) || '',
+    // CRITICAL: Webhooks provide variants as a direct array, not edges.
+    // We map them to the shopifyProductVariant object type.
+    variants: (Array.isArray(variants) ? variants : variants?.edges?.map((e: any) => e.node) || []).map((variant: any, index: number) => {
+      const variantId = extractIdFromGid(variant.id);
       return {
-        _key: extractIdFromGid(variant.id),
-        _type: 'productVariant',
-        id: Number(extractIdFromGid(variant.id)),
+        _key: variantId || String(index),
+        _type: 'shopifyProductVariant',
+        id: Number(variantId),
         gid: variant.id,
+        productId: Number(productId),
+        productGid: id,
         title: variant.title,
-        price: Number(variant.price?.amount || 0),
         sku: variant.sku,
-        isAvailable: variant.availableForSale,
+        price: Number(variant.price?.amount || variant.price || 0),
+        compareAtPrice: Number(variant.compareAtPrice?.amount || variant.compareAtPrice || 0),
+        isDeleted: false,
+        status: status?.toLowerCase(),
+        option1: variant.selectedOptions?.[0]?.value || variant.option1,
+        option2: variant.selectedOptions?.[1]?.value || variant.option2,
+        option3: variant.selectedOptions?.[2]?.value || variant.option3,
+        inventory: {
+          isAvailable: variant.availableForSale ?? variant.inventoryQuantity > 0,
+          management: variant.inventoryManagement,
+          policy: variant.inventoryPolicy,
+        }
       };
-    }) || [],
+    }),
   };
 
   return {

@@ -1,5 +1,6 @@
 import { type SchemaTypeDefinition } from 'sanity';
-import { product, productVariant } from './product';
+import { product } from './product';
+import { shopifyProductVariant } from './shopifyProductVariant';
 import { home } from './home';
 import { collection } from './collection';
 import { page } from './page';
@@ -17,7 +18,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     page, 
     collection, 
     product, 
-    productVariant, 
+    shopifyProductVariant, 
     colorTheme, 
     settings, 
     cta, 
