@@ -149,6 +149,46 @@ export async function getProducts(): Promise<any[]> {
   }
 }
 
+export async function getSnowboards(): Promise<any[]> {
+  if (!projectId || projectId === 'mockProjectId' || projectId === 'your_sanity_project_id') {
+    return [];
+  }
+
+  try {
+    const query = groq`*[_type == "product" && store.isDeleted != true && store.status == "active" && (store.productType match "Snowboard*" || store.tags match "*Snowboard*")] | order(_createdAt desc) {
+      "id": _id,
+      "handle": coalesce(store.slug.current, slug.current, handle, _id),
+      "title": coalesce(store.title, title, "Untitled Product"),
+      "priceRange": {
+        "minVariantPrice": {
+          "amount": string(coalesce(store.priceRange.minVariantPrice.amount, store.priceRange.minVariantPrice, price, variantPrice, "0")),
+          "currencyCode": "USD" 
+        }
+      },
+      "images": {
+        "edges": [
+          {
+            "node": {
+              "url": coalesce(store.previewImageUrl, imageUrl, image.asset->url, "https://picsum.photos/seed/" + coalesce(store.slug.current, slug.current, handle, _id) + "/1200/1500"),
+              "altText": coalesce(store.title, title, "Product Image")
+            }
+          }
+        ]
+      }
+    }`;
+    
+    const { data: products } = await sanityFetch({ 
+      query,
+      tags: ['product'] 
+    });
+    
+    return products || [];
+  } catch (error) {
+    console.error('Error fetching snowboards from Sanity:', error);
+    return [];
+  }
+}
+
 export async function getProductBySlug(slug: string): Promise<any | null> {
   if (!projectId || projectId === 'mockProjectId' || projectId === 'your_sanity_project_id') {
     return null;

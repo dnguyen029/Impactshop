@@ -24,7 +24,7 @@ export default function Hero() {
         </h1>
         <div className="flex flex-col sm:flex-row gap-4">
           <Link 
-            href="#collection" 
+            href="/search" 
             className="bg-zinc-900/80 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-sm font-bold transition-colors hover:bg-zinc-900"
           >
             Discover Collection

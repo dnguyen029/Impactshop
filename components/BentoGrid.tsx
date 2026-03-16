@@ -10,28 +10,28 @@ const defaultCategories = [
     title: "Men's Boards",
     image: 'https://picsum.photos/seed/mens-snowboard/800/800',
     size: 'large',
-    href: '/#collection'
+    href: '/search'
   },
   {
     _key: 'default-womens',
     title: "Women's Boards",
     image: 'https://picsum.photos/seed/womens-snowboard/800/800',
     size: 'small',
-    href: '/#collection'
+    href: '/search'
   },
   {
     _key: 'default-bindings',
     title: 'Bindings',
     image: 'https://picsum.photos/seed/snowboard-bindings/800/800',
     size: 'small',
-    href: '/#collection'
+    href: '/search'
   },
   {
     _key: 'default-boots',
     title: 'Step On® Boots',
     image: 'https://picsum.photos/seed/snowboard-boots/1200/800',
     size: 'wide',
-    href: '/#collection'
+    href: '/search'
   }
 ];
 
@@ -42,7 +42,7 @@ export default function BentoGrid({ tiles }: { tiles?: any[] }) {
         _key: tile._key,
         image: tile.imageUrl || `https://picsum.photos/seed/bento-${i}/800/800`,
         size: i === 0 ? 'large' : i === 3 ? 'wide' : 'small', // Keep the same layout pattern
-        href: tile.collection?.handle ? `/collections/${tile.collection.handle}` : (tile.link || '#')
+        href: '/search'
       }))
     : defaultCategories;
 

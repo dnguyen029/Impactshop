@@ -23,25 +23,27 @@ export default function Header() {
             Impact
           </Link>
           <nav className="hidden lg:flex items-center gap-6">
-            <Link href="/#collection" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
+            <Link href="/snowboards" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
               Snowboards
             </Link>
-            <Link href="/#collection" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
+            <Link href="/search?q=bindings" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
               Bindings
             </Link>
-            <Link href="/#collection" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
+            <Link href="/search?q=apparel" className="text-sm font-medium uppercase tracking-widest text-zinc-500 hover:text-zinc-900 transition-colors">
               Apparel
             </Link>
           </nav>
         </div>
 
         <div className="flex items-center gap-6">
-          <button 
-            className="text-zinc-900 hover:text-zinc-500 transition-colors"
-            aria-label="Search items"
-          >
-            <Search size={20} />
-          </button>
+          <Link href="/search" aria-label="Search items">
+            <button 
+              className="text-zinc-900 hover:text-zinc-500 transition-colors"
+              tabIndex={-1}
+            >
+              <Search size={20} />
+            </button>
+          </Link>
           <button 
             className="text-zinc-900 hover:text-zinc-500 transition-colors relative"
             aria-label="View shopping bag"
@@ -72,21 +74,21 @@ export default function Header() {
             </button>
             <nav className="flex flex-col gap-8 mt-12">
               <Link 
-                href="/#collection" 
+                href="/snowboards" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-3xl font-black uppercase tracking-tighter text-zinc-900"
               >
                 Snowboards
               </Link>
               <Link 
-                href="/#collection" 
+                href="/search?q=bindings" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-3xl font-black uppercase tracking-tighter text-zinc-900"
               >
                 Bindings
               </Link>
               <Link 
-                href="/#collection" 
+                href="/search?q=apparel" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-3xl font-black uppercase tracking-tighter text-zinc-900"
               >

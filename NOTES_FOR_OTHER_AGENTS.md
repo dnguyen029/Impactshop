@@ -16,6 +16,14 @@ To keep the homepage and product displays up-to-date with Sanity data, **do not 
 - The Sanity Connect "Custom sync" will hit your sync handler, which updates Sanity.
 - Then, a **Sanity Webhook** should trigger your Next.js API Route (e.g., `app/api/revalidate/route.ts`).
 - Inside that route, call `revalidateTag('products')` or `revalidatePath('/')`.
+- **CRITICAL WEBHOOK CONFIGURATION:** The manual cache-clearing Sanity Webhook (pointing to `/api/revalidate`) **MUST** use the following GROQ projection to properly pass the slug to Next.js for both Shopify products and standard Sanity documents:
+  ```groq
+  {
+    _type,
+    "slug": coalesce(store.slug.current, slug.current)
+  }
+  ```
+- **Filter**: Leave the Filter field completely empty so it triggers on all document types.
 
 ### 2. Strict Deployment Constraints
 The `nextjs-deployment-safety` skill dictates that **the following Next.js experimental features MUST REMAIN DISABLED** in `next.config.ts`, or the Vercel deployments will fail:
@@ -34,3 +42,13 @@ The Vercel-Sanity integration automatically configures `NEXT_PUBLIC_SANITY_PROJE
 ### 4. Agent Execution Warnings
 - **CRITICAL**: Do NOT run continuous development servers like `npm run dev` synchronously. Doing so will cause you to hang indefinitely waiting for the command to finish. If the user asks for a dev server to be started, you must instruct them to start it manually in a separate terminal.
 - **Build Commands**: When running `npm run build`, be aware that it may trigger interactive prompts (e.g., asking to install `baseline-browser-mapping`). Since agents run commands non-interactively, this can also cause a permanent hang. Work around this by using flags like `--yes` if applicable, or instruct the user to run it.
+
+### 5. API Keys and Environment Variables
+- **Shopify Public Access Token**: <removed>
+- **Shopify Private Access Token**: <removed>
+- **Shopify API Secret ID**: <removed>
+- **Shopify API Secret**: <removed>
+- **Sanity API Write Token**: <removed>
+- **NEXT_PUBLIC_SANITY_PROJECT_ID**: 25mbwlje
+- **Vercel API Token**: <removed>
+- **GitHub Personal Access Token**: <removed>

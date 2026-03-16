@@ -16,10 +16,10 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-bold uppercase tracking-widest mb-6">Shop</h4>
           <ul className="space-y-4 text-zinc-400">
-            <li><Link href="/#collection" className="hover:text-white transition-colors">Snowboards</Link></li>
-            <li><Link href="/#collection" className="hover:text-white transition-colors">Bindings</Link></li>
-            <li><Link href="/#collection" className="hover:text-white transition-colors">Boots</Link></li>
-            <li><Link href="/#collection" className="hover:text-white transition-colors">Apparel</Link></li>
+            <li><Link href="/search" className="hover:text-white transition-colors">Snowboards</Link></li>
+            <li><Link href="/search" className="hover:text-white transition-colors">Bindings</Link></li>
+            <li><Link href="/search" className="hover:text-white transition-colors">Boots</Link></li>
+            <li><Link href="/search" className="hover:text-white transition-colors">Apparel</Link></li>
           </ul>
         </div>
 
