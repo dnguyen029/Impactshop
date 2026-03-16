@@ -8,14 +8,21 @@ export const collection = defineType({
   type: 'document',
   icon: TiersIcon,
   fields: [
-    defineField({ name: 'id', type: 'number', title: 'ID' }),
-    defineField({ name: 'gid', type: 'string', title: 'GID' }),
-    defineField({ name: 'title', type: 'string', title: 'Title' }),
-    defineField({ name: 'handle', type: 'string', title: 'Handle' }),
-    defineField({ name: 'slug', type: 'slug', title: 'Slug' }),
-    defineField({ name: 'imageUrl', type: 'url', title: 'Image URL' }),
-    defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
-    defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
+    defineField({
+      name: 'store',
+      title: 'Store',
+      type: 'object',
+      fields: [
+        defineField({ name: 'id', type: 'number', title: 'ID' }),
+        defineField({ name: 'gid', type: 'string', title: 'GID' }),
+        defineField({ name: 'title', type: 'string', title: 'Title' }),
+        defineField({ name: 'handle', type: 'string', title: 'Handle' }),
+        defineField({ name: 'slug', type: 'slug', title: 'Slug' }),
+        defineField({ name: 'imageUrl', type: 'url', title: 'Image URL' }),
+        defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
+        defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
+      ],
+    }),
     defineField({
       name: 'products',
       title: 'Products',
@@ -27,8 +34,8 @@ export const collection = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
-      mediaUrl: 'imageUrl',
+      title: 'store.title',
+      mediaUrl: 'store.imageUrl',
     },
     prepare(selection) {
       const { title, mediaUrl } = selection;
