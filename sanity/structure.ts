@@ -34,8 +34,8 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .title('Store')
             .items([
-              S.documentTypeListItem('shopifyProduct').title('Products').icon(BasketIcon),
-              S.documentTypeListItem('shopifyCollection').title('Collections').icon(TiersIcon),
+              S.documentTypeListItem('product').title('Products').icon(BasketIcon),
+              S.documentTypeListItem('collection').title('Collections').icon(TiersIcon),
             ])
         ),
       S.divider(),

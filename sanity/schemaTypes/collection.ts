@@ -2,8 +2,8 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 import { TiersIcon } from '@sanity/icons';
 import React from 'react';
 
-export const shopifyCollection = defineType({
-  name: 'shopifyCollection',
+export const collection = defineType({
+  name: 'collection',
   title: 'Collection',
   type: 'document',
   icon: TiersIcon,
@@ -21,7 +21,7 @@ export const shopifyCollection = defineType({
       title: 'Products',
       type: 'array',
       of: [
-        defineArrayMember({ type: 'reference', to: [{ type: 'shopifyProduct' }] })
+        defineArrayMember({ type: 'reference', to: [{ type: 'product' }] })
       ],
     }),
   ],

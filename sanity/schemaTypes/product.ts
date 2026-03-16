@@ -2,8 +2,8 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 import { BasketIcon, TagIcon } from '@sanity/icons';
 import React from 'react';
 
-export const shopifyProduct = defineType({
-  name: 'shopifyProduct',
+export const product = defineType({
+  name: 'product',
   title: 'Product',
   type: 'document',
   icon: BasketIcon,
@@ -75,7 +75,7 @@ export const shopifyProduct = defineType({
       of: [
         defineArrayMember({ 
           type: 'reference', 
-          to: [{ type: 'shopifyProductVariant' }],
+          to: [{ type: 'productVariant' }],
           weak: true 
         })
       ] 
@@ -108,8 +108,8 @@ export const shopifyProduct = defineType({
   },
 });
 
-export const shopifyProductVariant = defineType({
-  name: 'shopifyProductVariant',
+export const productVariant = defineType({
+  name: 'productVariant',
   title: 'Product Variant',
   type: 'document',
   icon: TagIcon,
