@@ -14,31 +14,13 @@ export const homepage = defineType({
       description: 'Used for internal reference',
     }),
     defineField({
-      name: 'hero',
-      title: 'Hero Section',
-      type: 'hero',
-    }),
-    defineField({
-      name: 'tiles',
-      title: 'Feature Tiles',
+      name: 'sections',
+      title: 'Sections',
       type: 'array',
       of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({ name: 'title', title: 'Title', type: 'string' }),
-            defineField({ name: 'description', title: 'Description', type: 'text' }),
-            defineField({ name: 'image', title: 'Image', type: 'image', options: { hotspot: true }, fields: [
-              defineField({
-                name: 'alt',
-                type: 'string',
-                title: 'Alternative Text',
-                validation: (rule) => rule.required(),
-              }),
-            ] }),
-            defineField({ name: 'link', title: 'Link', type: 'string' }),
-          ],
-        },
+        defineArrayMember({ type: 'hero' }),
+        defineArrayMember({ type: 'collectionGrid' }),
+        defineArrayMember({ type: 'featureSection' }),
       ],
     }),
   ],

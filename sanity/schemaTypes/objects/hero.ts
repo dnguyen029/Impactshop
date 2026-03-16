@@ -8,6 +8,11 @@ export const hero = defineType({
   icon: ImageIcon,
   fields: [
     defineField({
+      name: 'eyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -16,6 +21,12 @@ export const hero = defineType({
       name: 'subheading',
       title: 'Subheading',
       type: 'string',
+    }),
+    defineField({
+      name: 'brandingTitle',
+      title: 'Branding Title/Badge',
+      type: 'string',
+      description: 'e.g. "NEW RELEASE" or "IMPACT"',
     }),
     defineField({
       name: 'image',
@@ -33,7 +44,12 @@ export const hero = defineType({
     }),
     defineField({
       name: 'cta',
-      title: 'Call to Action',
+      title: 'Primary Call to Action',
+      type: 'cta',
+    }),
+    defineField({
+      name: 'secondaryCta',
+      title: 'Secondary Call to Action',
       type: 'cta',
     }),
   ],
