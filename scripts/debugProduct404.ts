@@ -9,9 +9,11 @@ const client = createClient({
 });
 
 async function debug() {
+  const slug = 'aligned-test-snowboard-direct';
   try {
-    const products = await client.fetch(`*[_type == "product"][0..5]{_id, _type, store{title, slug, status}}`);
-    console.log('Sample Products:', JSON.stringify(products, null, 2));
+    const query = `*[_type == "product" && store.isDeleted != true && (store.slug.current == $slug || slug.current == $slug || handle == $slug)][0]`;
+    const product = await client.fetch(query, { slug });
+    console.log('Product by slug:', JSON.stringify(product, null, 2));
   } catch (err) {
     console.error('Debug failed:', err);
   }
