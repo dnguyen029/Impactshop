@@ -9,6 +9,7 @@ import { cta } from './objects/cta';
 import { hero } from './objects/hero';
 import { collectionGrid } from './objects/collectionGrid';
 import { featureSection } from './objects/featureSection';
+import { productGrid } from './objects/productGrid';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -22,6 +23,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     cta, 
     hero, 
     collectionGrid, 
-    featureSection
+    featureSection,
+    productGrid
   ],
 };

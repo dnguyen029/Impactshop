@@ -68,7 +68,10 @@ export async function getHomepageData(): Promise<any | null> {
         },
         // Feature Section fields
         description,
-        "images": images[].asset->url
+        "images": images[].asset->url,
+        // Product Grid fields
+        title,
+        eyebrow
       }
     }`;
     

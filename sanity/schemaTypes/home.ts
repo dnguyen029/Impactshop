@@ -21,6 +21,7 @@ export const home = defineType({
         defineArrayMember({ type: 'hero' }),
         defineArrayMember({ type: 'collectionGrid' }),
         defineArrayMember({ type: 'featureSection' }),
+        defineArrayMember({ type: 'productGrid' }),
       ],
     }),
   ],

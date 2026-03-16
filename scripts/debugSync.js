@@ -1,0 +1,30 @@
+const { createClient } = require('@sanity/client');
+
+const client = createClient({
+  projectId: '25mbwlje',
+  dataset: 'production',
+  apiVersion: '2025-03-15',
+  token: 'skg5JogUjV6bwKvIgMK2nsRjjtC5AvrKax2aQpi98TMa9nwGpWWI4c1kMRD3h5Jb3NAWsr0ick2aYVtyg84WyUjwrkGFmhHbDIiGNNtlFr5A5CqIkSyzBXAAs0v0xm7SVHkZXAD7jOzpq1VERIe2QYGpFLtHcDj25Yq7p3WTsnt2vaVZqey4',
+  useCdn: false,
+});
+
+async function debugProducts() {
+  try {
+    const totalCount = await client.fetch('count(*[_type == "product"])');
+    const syncCount = await client.fetch('count(*[_type == "product" && defined(store)])');
+    const recent = await client.fetch('*[_type == "product"] | order(_updatedAt desc) [0..2]');
+    
+    console.log('Total Product Documents:', totalCount);
+    console.log('Products with "store" object (Synced):', syncCount);
+    console.log('Sample Recent Data:', JSON.stringify(recent, null, 2));
+    
+    if (recent.length > 0) {
+        console.log('Latest product title:', recent[0].store?.title || recent[0].title);
+        console.log('Latest product updatedAt:', recent[0]._updatedAt);
+    }
+  } catch (err) {
+    console.error('Fetch error:', err);
+  }
+}
+
+debugProducts();
