@@ -7,6 +7,7 @@ Based on an analysis of the Next.js App Router and Sanity-Vercel integration doc
 ### 1. Custom Sync vs Direct Sync (Shopify)
 - **CRITICAL**: In the Shopify "Sanity Connect" app, you **MUST** select **"Custom sync"** instead of "Direct sync".
 - **Why**: "Direct sync" creates separate documents for variants and links them as references. The current schema (`product.ts`) and frontend code expect variants to be **inline objects**.
+- **Product Visibility Filtering**: Because Impactshop uses "Custom sync", when a product is unpublished in Shopify, its Sanity document is NOT deleted. Instead, the payload updates `store.status` to `draft` or `archived`. Therefore, **all GROQ queries fetching products MUST check `store.status == "active"`** (not just `store.isDeleted != true`).
 - **The URL**: Set the Custom Sync Function URL to `https://impactshop-kappa.vercel.app/api/sanity-sync-handler`.
 
 ### 2. On-Demand Revalidation via Webhooks
