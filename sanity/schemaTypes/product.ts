@@ -8,75 +8,82 @@ export const product = defineType({
   type: 'document',
   icon: BasketIcon,
   fields: [
-    defineField({ name: 'id', type: 'number', title: 'ID' }),
-    defineField({ name: 'gid', type: 'string', title: 'GID' }),
-    defineField({ name: 'title', type: 'string', title: 'Title' }),
-    defineField({ name: 'handle', type: 'string', title: 'Handle' }),
-    defineField({ name: 'slug', type: 'slug', title: 'Slug' }),
-    defineField({ name: 'status', type: 'string', title: 'Status' }),
-    defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
-    defineField({ name: 'descriptionHtml', type: 'text', title: 'HTML Description' }),
-    defineField({ name: 'vendor', type: 'string', title: 'Vendor' }),
-    defineField({ name: 'productType', type: 'string', title: 'Product Type' }),
-    defineField({ name: 'tags', type: 'string', title: 'Tags' }),
-    defineField({ name: 'priceRange', type: 'object', title: 'Price Range', fields: [
-      defineField({ name: 'minVariantPrice', type: 'number', title: 'Min Variant Price' }),
-      defineField({ name: 'maxVariantPrice', type: 'number', title: 'Max Variant Price' }),
-    ]}),
-    defineField({ name: 'previewImageUrl', type: 'url', title: 'Preview Image URL' }),
     defineField({
-      name: 'shop',
+      name: 'store',
+      title: 'Store',
       type: 'object',
-      title: 'Shop',
-      fields: [defineField({ name: 'domain', type: 'string', title: 'Domain' })],
-    }),
-    defineField({ 
-      name: 'images', 
-      type: 'array', 
-      title: 'Images', 
-      of: [
-        defineArrayMember({
+      fields: [
+        defineField({ name: 'id', type: 'number', title: 'ID' }),
+        defineField({ name: 'gid', type: 'string', title: 'GID' }),
+        defineField({ name: 'title', type: 'string', title: 'Title' }),
+        defineField({ name: 'handle', type: 'string', title: 'Handle' }),
+        defineField({ name: 'slug', type: 'slug', title: 'Slug' }),
+        defineField({ name: 'status', type: 'string', title: 'Status' }),
+        defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
+        defineField({ name: 'descriptionHtml', type: 'text', title: 'HTML Description' }),
+        defineField({ name: 'vendor', type: 'string', title: 'Vendor' }),
+        defineField({ name: 'productType', type: 'string', title: 'Product Type' }),
+        defineField({ name: 'tags', type: 'string', title: 'Tags' }),
+        defineField({ name: 'priceRange', type: 'object', title: 'Price Range', fields: [
+          defineField({ name: 'minVariantPrice', type: 'number', title: 'Min Variant Price' }),
+          defineField({ name: 'maxVariantPrice', type: 'number', title: 'Max Variant Price' }),
+        ]}),
+        defineField({ name: 'previewImageUrl', type: 'url', title: 'Preview Image URL' }),
+        defineField({
+          name: 'shop',
           type: 'object',
-          fields: [
-            defineField({ name: 'id', type: 'string', title: 'ID' }),
-            defineField({ name: 'altText', type: 'string', title: 'Alt Text' }),
-            defineField({ name: 'src', type: 'url', title: 'Source URL' }),
-            defineField({ name: 'width', type: 'number', title: 'Width' }),
-            defineField({ name: 'height', type: 'number', title: 'Height' }),
+          title: 'Shop',
+          fields: [defineField({ name: 'domain', type: 'string', title: 'Domain' })],
+        }),
+        defineField({ 
+          name: 'images', 
+          type: 'array', 
+          title: 'Images', 
+          of: [
+            defineArrayMember({
+              type: 'object',
+              fields: [
+                defineField({ name: 'id', type: 'string', title: 'ID' }),
+                defineField({ name: 'altText', type: 'string', title: 'Alt Text' }),
+                defineField({ name: 'src', type: 'url', title: 'Source URL' }),
+                defineField({ name: 'width', type: 'number', title: 'Width' }),
+                defineField({ name: 'height', type: 'number', title: 'Height' }),
+              ]
+            })
           ]
-        })
-      ]
-    }),
-    defineField({ 
-      name: 'options', 
-      type: 'array', 
-      title: 'Options', 
-      of: [
-        defineArrayMember({
-          name: 'option',
-          type: 'object',
-          fields: [
-            defineField({ name: 'name', type: 'string', title: 'Name' }),
-            defineField({ name: 'values', type: 'array', title: 'Values', of: [{ type: 'string' }] }),
+        }),
+        defineField({ 
+          name: 'options', 
+          type: 'array', 
+          title: 'Options', 
+          of: [
+            defineArrayMember({
+              name: 'option',
+              type: 'object',
+              fields: [
+                defineField({ name: 'name', type: 'string', title: 'Name' }),
+                defineField({ name: 'values', type: 'array', title: 'Values', of: [{ type: 'string' }] }),
+              ]
+            })
           ]
-        })
-      ]
+        }),
+        defineField({ 
+          name: 'variants', 
+          type: 'array', 
+          title: 'Variants', 
+          of: [
+            defineArrayMember({ 
+              type: 'reference', 
+              to: [{ type: 'productVariant' }],
+              weak: true 
+            })
+          ] 
+        }),
+        defineField({ name: 'createdAt', type: 'datetime', title: 'Created At' }),
+        defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
+        defineField({ name: 'publishedAt', type: 'datetime', title: 'Published At' }),
+      ],
     }),
-    defineField({ 
-      name: 'variants', 
-      type: 'array', 
-      title: 'Variants', 
-      of: [
-        defineArrayMember({ 
-          type: 'reference', 
-          to: [{ type: 'productVariant' }],
-          weak: true 
-        })
-      ] 
-    }),
-    defineField({ name: 'createdAt', type: 'datetime', title: 'Created At' }),
-    defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
-    defineField({ name: 'publishedAt', type: 'datetime', title: 'Published At' }),
     defineField({
       name: 'details',
       title: 'Rich Details (Sanity Only)',
@@ -87,9 +94,9 @@ export const product = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
-      subtitle: 'status',
-      mediaUrl: 'previewImageUrl',
+      title: 'store.title',
+      subtitle: 'store.status',
+      mediaUrl: 'store.previewImageUrl',
     },
     prepare(selection) {
       const { title, subtitle, mediaUrl } = selection;
@@ -108,29 +115,36 @@ export const productVariant = defineType({
   type: 'document',
   icon: TagIcon,
   fields: [
-    defineField({ name: 'id', type: 'number', title: 'ID' }),
-    defineField({ name: 'gid', type: 'string', title: 'GID' }),
-    defineField({ name: 'title', type: 'string', title: 'Title' }),
-    defineField({ name: 'sku', type: 'string', title: 'SKU' }),
-    defineField({ name: 'price', type: 'number', title: 'Price' }),
-    defineField({ name: 'compareAtPrice', type: 'number', title: 'Compare At Price' }),
-    defineField({ name: 'inventory', type: 'object', title: 'Inventory', fields: [
-      defineField({ name: 'isAvailable', type: 'boolean', title: 'Is Available' }),
-      defineField({ name: 'management', type: 'string', title: 'Management' }),
-      defineField({ name: 'policy', type: 'string', title: 'Policy' }),
-    ]}),
-    defineField({ name: 'option1', type: 'string', title: 'Option 1' }),
-    defineField({ name: 'option2', type: 'string', title: 'Option 2' }),
-    defineField({ name: 'option3', type: 'string', title: 'Option 3' }),
-    defineField({ name: 'status', type: 'string', title: 'Status' }),
-    defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
-    defineField({ name: 'createdAt', type: 'datetime', title: 'Created At' }),
-    defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
+    defineField({
+      name: 'store',
+      title: 'Store',
+      type: 'object',
+      fields: [
+        defineField({ name: 'id', type: 'number', title: 'ID' }),
+        defineField({ name: 'gid', type: 'string', title: 'GID' }),
+        defineField({ name: 'title', type: 'string', title: 'Title' }),
+        defineField({ name: 'sku', type: 'string', title: 'SKU' }),
+        defineField({ name: 'price', type: 'number', title: 'Price' }),
+        defineField({ name: 'compareAtPrice', type: 'number', title: 'Compare At Price' }),
+        defineField({ name: 'inventory', type: 'object', title: 'Inventory', fields: [
+          defineField({ name: 'isAvailable', type: 'boolean', title: 'Is Available' }),
+          defineField({ name: 'management', type: 'string', title: 'Management' }),
+          defineField({ name: 'policy', type: 'string', title: 'Policy' }),
+        ]}),
+        defineField({ name: 'option1', type: 'string', title: 'Option 1' }),
+        defineField({ name: 'option2', type: 'string', title: 'Option 2' }),
+        defineField({ name: 'option3', type: 'string', title: 'Option 3' }),
+        defineField({ name: 'status', type: 'string', title: 'Status' }),
+        defineField({ name: 'isDeleted', type: 'boolean', title: 'Is Deleted' }),
+        defineField({ name: 'createdAt', type: 'datetime', title: 'Created At' }),
+        defineField({ name: 'updatedAt', type: 'datetime', title: 'Updated At' }),
+      ],
+    }),
   ],
   preview: {
     select: {
-      title: 'title',
-      subtitle: 'price',
+      title: 'store.title',
+      subtitle: 'store.price',
     },
     prepare(selection) {
       const { title, subtitle } = selection;
