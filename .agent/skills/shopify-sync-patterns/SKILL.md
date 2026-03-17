@@ -2,8 +2,12 @@
 
 This skill documents the pattern for pushing Shopify data into Sanity via the `sanity-sync-handler`.
 
+## Data Strategy
+- **Primary**: Direct Shopify Storefront API fetching is preferred for storefront pages (e.g., `/snowboards`) to ensure real-time inventory and pricing accuracy.
+- **Secondary**: The `sanity-sync-handler` is used to maintain a Sanity document as a backup/metadata source.
+
 ## Data Mapping Strategy
-We use a custom sync handler to transform Shopify webhooks into Sanity documents.
+We use a custom sync handler (`app/api/sanity-sync-handler/route.ts`) to transform Shopify webhooks into Sanity documents.
 
 - **Document Type**: `product`
 - **ID Format**: `shopifyProduct-{SHOPIFY_ID}`
