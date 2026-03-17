@@ -75,15 +75,6 @@ export const product = defineType({
           of: [
             defineArrayMember({ 
               type: 'shopifyProductVariant',
-            }),
-            defineArrayMember({
-              type: 'reference',
-              to: [{ type: 'shopifyProductVariant' }]
-            }),
-            // Catch-all for unknown official variant types
-            defineArrayMember({
-              type: 'reference',
-              to: [{ type: 'productVariant' }] 
             })
           ] 
         }),
