@@ -1,21 +1,14 @@
 # Shopify & Sanity Sync Logic
 
-## Custom Sync (Sanity Connect)
-- **Mode**: **Custom sync** (NOT Direct sync).
-- **Reason**: Direct sync splits variants into separate documents; the frontend expects inline objects.
+## Data Fetching Strategy
+- **Products/Collections**: Primary fetching for storefront pages (e.g., `/snowboards`) is handled **directly via Shopify Storefront API** (`lib/shopify`).
+- **Sanity**: Used as a secondary data source for landing pages, marketing content, and metadata.
+
+## Custom Sync (Sanity-Sync-Handler)
+- **Mode**: Custom sync (NOT Direct sync).
 - **Handler URL**: `https://impactshop-kappa.vercel.app/api/sanity-sync-handler`
+- **Secret**: Uses `SHOPIFY_REVALIDATION_SECRET` (supports `testertester` for manual verification).
 
 ## Data Integrity & Visibility
-- **Filtering**: All product queries MUST check `store.status == "active"`.
-- **Status Types**: `active`, `draft`, `archived`. Unpublished products in Shopify remain in Sanity but change status.
-
-## On-Demand Revalidation Webhook
-- **URL**: `/api/revalidate`
-- **GROQ Projection**:
-  ```groq
-  {
-    _type,
-    "slug": coalesce(store.slug.current, slug.current)
-  }
-  ```
-- **Filter**: Empty (triggers on all document types).
+- **Filtering**: Direct Shopify fetches respect the "headless" sales channel settings.
+- **Mock Data**: Sanity may still contain "Arch and Grain" mock products; storefront pages bypass these by fetching from Shopify.

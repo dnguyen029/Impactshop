@@ -14,6 +14,9 @@
 | **Shopify Store** | Impactshop | |
 
 ## Rendering Strategy
-- **Product Pages**: Static (SSG) using `generateStaticParams`.
-- **Invalidation**: On-demand revalidation via tags (`product:${slug}`).
-- **Revalidation Route**: `app/api/revalidate/route.ts`
+- **Storefront Pages**: Dynamic fetching directly from **Shopify Storefront API** (e.g., `/snowboards`).
+- **Product Details**: Real-time fetching from Shopify to ensure pricing and inventory accuracy.
+- **Marketing Content**: Static (SSG) with on-demand revalidation from **Sanity**.
+- **Revalidation Routes**: 
+  - `app/api/revalidate/route.ts` (Sanity & Shopify Revalidation)
+  - `app/api/sanity-sync-handler/route.ts` (Shopify to Sanity Sync)

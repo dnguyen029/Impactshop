@@ -8,4 +8,12 @@ This log tracks high-level mission outcomes for future agent context.
   - Established `/knowledge-base/` with modular architecture, sync, and deployment docs.
   - Linked `scripts/manager-agent.ts` to the new KB.
   - Created `.agent/skills/agent-context-management` to enforce token-saving behaviors.
-- **Reference**: See [walkthrough.md](C:/Users/dnguy/.gemini/antigravity/brain/0f92f84f-09cc-490b-8dca-4794747e321c/walkthrough.md) for full implementation details.
+
+## 2026-03-16: Burton Logic Alignment (Snowboards)
+- **Goal**: Resolve mock product visibility and align with Burton's working sync.
+- **Outcome**:
+  - Ported `lib/shopify` from Burton for direct Shopify Storefront API access.
+  - Refactored `/snowboards` page to fetch directly from Shopify, bypassing stale Sanity mock data.
+  - Implemented `/api/sanity-sync-handler` webhook for Shopify-to-Sanity sync.
+  - Verified webhook functionality with manual GET support.
+  - Successfully deployed to Vercel via GitHub push.
