@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const seo = homeData?.seo || settings?.seo;
 
   return {
-    title: seo?.title || homeData?.title || settings?.title || 'Impact Snowboards',
+    title: seo?.title || (homeData?.title?.includes('Burton') ? 'Impact Snowboards' : homeData?.title) || 'Impact Snowboards',
     description: seo?.description || settings?.description,
     openGraph: {
       images: seo?.image ? [{ url: seo.image }] : undefined,

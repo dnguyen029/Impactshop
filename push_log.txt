@@ -1,0 +1,100 @@
+git : remote: error: 
+GH013: Repository rule 
+violations found for 
+refs/heads/main.       
+ 
+At line:1 char:1
++ git push origin main 
+--force 2>&1 | 
+Out-File -FilePath 
+push_log.txt - ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (remote: error   
+ : ...s/main.          
+  :String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+remote: 
+remote: - GITHUB PUSH 
+PROTECTION        
+remote:   ?????????????
+???????????????????????
+???????????????????????
+???????????????????????
+???????????????????????
+??????????????????     
+   
+remote:     Resolve 
+the following 
+violations before 
+pushing again        
+remote: 
+remote:     - Push 
+cannot contain secrets 
+       
+remote: 
+remote:             
+remote:      (?) Learn 
+how to resolve a 
+blocked push        
+remote:      https://do
+cs.github.com/code-secu
+rity/secret-scanning/wo
+rking-with-secret-scann
+ing-and-push-protection
+/working-with-push-prot
+ection-from-the-command
+-line#resolving-a-block
+ed-push        
+remote:             
+remote:             
+remote:       ?????? 
+Vercel Personal Access 
+Token ?????????????????
+???????????????????????
+???????????????????????
+???        
+remote:        
+locations:        
+remote:          - 
+commit: fb109517d46ae2a
+2d1510232bb3c6e041c7b74
+c3        
+remote:            
+path: scripts/compare_v
+ercel_secrets.js:3     
+   
+remote:             
+remote:        (?) To 
+push, remove secret 
+from commit(s) or 
+follow this URL to 
+allow the secret.      
+  
+remote:        https://
+github.com/dnguyen029/I
+mpactshop/security/secr
+et-scanning/unblock-sec
+ret/3B2tSWkDqkGBXBe6kIG
+xkOMwn4R        
+remote:             
+remote: 
+remote: 
+To https://github.com/d
+nguyen029/Impactshop.gi
+t
+ ! [remote rejected] 
+main -> main (push 
+declined due to 
+repository rule 
+violations)
+error: failed to push 
+some refs to 'https://g
+ithub.com/dnguyen029/Im
+pactshop.git'

@@ -4,30 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 
+import { Product } from '@/lib/shopify/types'
+
 interface ProductCardProps {
-  product: {
-    id: string
-    handle: string
-    title: string
-    priceRange: {
-      minVariantPrice: {
-        amount: string
-        currencyCode: string
-      }
-    }
-    images: {
-      edges: {
-        node: {
-          url: string
-          altText: string
-        }
-      }[]
-    }
-  }
+  product: Product
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const image = product.images?.edges?.[0]?.node
+  const image = product.images?.[0]
   const price = product.priceRange?.minVariantPrice
 
   return (

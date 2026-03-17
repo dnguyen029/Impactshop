@@ -1,12 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProductBySlug, getSettings } from '@/sanity/lib/queries';
+import { getProductBySlug, getSettings, getProducts } from '@/sanity/lib/queries';
 import ProductInteractive from '@/components/ProductInteractive';
 import { PortableText } from '@portabletext/react';
 import { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+
+export async function generateStaticParams() {
+  const products = await getProducts();
+  return products.map((product) => ({
+    slug: product.handle,
+  }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -18,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const seo = product?.seo || settings?.seo;
 
   return {
-    title: seo?.title || product?.title || 'Product Details',
+    title: seo?.title || (product?.title ? `${product.title} | Impact` : 'Impact Snowboards'),
     description: seo?.description || product?.descriptionHtml?.substring(0, 160),
     openGraph: {
       images: seo?.image ? [{ url: seo.image }] : product?.images?.edges?.[0]?.node?.url ? [{ url: product.images.edges[0].node.url }] : undefined,
@@ -67,11 +73,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           {/* Right Column: Product Info (Sticky) */}
           <div className="lg:sticky lg:top-24 h-fit flex flex-col">
             <div className="mb-6">
-              {product.vendor && (
-                <p className="text-sm font-bold uppercase tracking-widest text-zinc-500 mb-2">
-                  {product.vendor}
-                </p>
-              )}
               <h1 className="font-display text-4xl md:text-5xl font-normal tracking-normal text-zinc-900">
                 {product.title}
               </h1>
