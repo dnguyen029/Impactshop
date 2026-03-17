@@ -17,3 +17,11 @@ This log tracks high-level mission outcomes for future agent context.
   - Implemented `/api/sanity-sync-handler` webhook for Shopify-to-Sanity sync.
   - Verified webhook functionality with manual GET support.
   - Successfully deployed to Vercel via GitHub push.
+
+## 2026-03-16: UI & Schema Maintenance
+- **Goal**: Clean up mobile UX and resolve Sanity Studio compilation errors.
+- **Outcome**:
+  - Removed mobile hamburger menu and associated logic from `Header.tsx` for a minimalist design.
+  - Fixed duplicate reference name errors and "unknown type" errors in `sanity/schemaTypes/product.ts`.
+  - Cleaned up local git history by removing blocked commits containing secrets.
+  - Pushed a clean, secure build to GitHub/Vercel.
